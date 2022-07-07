@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import icon from "../assets/logo_user.png";
+import icon from "../assets/lnk.png";
 import axios from "axios";
 import { Alert } from "react-bootstrap";
 import "../style/login-page.css";
-import { useNavigate,Navigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 const LoginPages = () => {
   const baseUrl = process.env.REACT_APP_BASE_URL_PRODUCTION;
   const navigate = useNavigate();
@@ -16,17 +16,21 @@ const LoginPages = () => {
       password: password,
     };
     e.preventDefault();
-    const login = await axios.post(`${baseUrl}/login`, data);
-    if (login.data.success === false) {
-      setError(login.data.message);
-    } else if (login.data.success === true) {
-      localStorage.setItem("token", login.data.data.token);
-      navigate("/calculator");
+    if (username === "" || password === "") {
+      setError(` Field tidak boleh kosong`);
+    } else {
+      const login = await axios.post(`${baseUrl}/login`, data);
+      if (login.data.success === false) {
+        setError(login.data.message);
+      } else if (login.data.success === true) {
+        localStorage.setItem("token", login.data.data.token);
+        navigate("/calculator");
+      }
     }
   };
   const handleNavigate = () => {
-    navigate('/register')
-  }
+    navigate("/register");
+  };
   return (
     <div className="main">
       <div className="sub-main">
@@ -59,6 +63,7 @@ const LoginPages = () => {
             <button className="button-login" onClick={handleSubmit}>
               Login
             </button>
+            <br></br>
             <button className="button-login" onClick={handleNavigate}>
               Register
             </button>

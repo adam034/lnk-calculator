@@ -1,7 +1,12 @@
-# Cara menjalankan aplikasi 
+# Cara menjalankan aplikasi
+
+## Requirement
+
+`Node Js Versi 14.17.0`
+
 ### `1. Clone project`
 
-Clone project dari repository terlebih dahulu dengan perintah `git clone`. Untuk mode `https`, gunakan perintah `git clone https://github.com/adam034/lnk-calculator.git`. Sedangkan untuk mode `ssh`, gunakan perintah `git clone git@github.com:adam034/lnk-calculator.git`
+Clone project dari repository terlebih dahulu dengan perintah `git clone`. Untuk mode `https`, gunakan perintah `git clone https://github.com/adam034/lnk-statistik.git`. Sedangkan untuk mode `ssh`, gunakan perintah `git clone git@github.com:adam034/lnk-statistik.git`. Setelah itu, buat file `.env` pada root directori, dan copy kan isi dari file `.env.example` ke file `.env`
 
 ### `2. Install package`
 
@@ -14,4 +19,3 @@ Setelah package selesai terinstall, jalankan perintah `npm start ` untuk menjala
 ### `4 Akses Aplikasi`
 
 Setelah itu, aplikasi bisa diakses melalui `http://localhost:3000`
-

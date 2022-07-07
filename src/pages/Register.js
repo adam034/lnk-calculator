@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import icon from "../assets/logo_user.png";
+import icon from "../assets/lnk.png";
 import axios from "axios";
 import { Alert } from "react-bootstrap";
 import "../style/login-page.css";
@@ -15,25 +15,24 @@ const RegisterPages = () => {
     let data = {
       username: username,
       password: password,
-      fullname: fullname
+      fullname: fullname,
     };
     e.preventDefault();
     if (username === "" || password === "" || fullname === "") {
-        setError("field tidak boleh kosong")
+      setError("field tidak boleh kosong");
     } else {
-        const login = await axios.post(`${baseUrl}/register`, data);
-        if (login.data.success === false) {
-          setError(login.data.message);
-        } else if (login.data.success === true) {
-            //console.log(login.data)
+      const login = await axios.post(`${baseUrl}/register`, data);
+      if (login.data.success === false) {
+        setError(login.data.message);
+      } else if (login.data.success === true) {
+        //console.log(login.data)
         navigate("/login");
-        }
+      }
     }
-    
   };
   const handleLogin = () => {
-    navigate('/login')
-  }
+    navigate("/login");
+  };
   return (
     <div className="main">
       <div className="sub-main">
@@ -52,7 +51,8 @@ const RegisterPages = () => {
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="Username"
                 className="username"
-              required></input>
+                required
+              ></input>
             </div>
             <div>
               <input
@@ -61,7 +61,8 @@ const RegisterPages = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Password"
                 className="password"
-              required></input>
+                required
+              ></input>
             </div>
             <div>
               <input
@@ -70,11 +71,13 @@ const RegisterPages = () => {
                 onChange={(e) => setFullname(e.target.value)}
                 placeholder="Fullname"
                 className="password"
-              required></input>
+                required
+              ></input>
             </div>
             <button className="button-login" onClick={handleSubmit}>
               Register
             </button>
+            <br></br>
             <button className="button-login" onClick={handleLogin}>
               Login
             </button>
