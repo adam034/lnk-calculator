@@ -6,6 +6,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import LoginPages from "./pages/Login";
+import RegisterPages from "./pages/Register";
 import CalculatorPages from "./pages/Calculator";
 import ProtectedRoutes from "./pages/ProtectedRoutes";
 import ProtectAfterLogin from "./pages/ProtecAfterLogin";
@@ -22,7 +23,7 @@ function App(props) {
             ></Route>
             <Route exact path="/login" element={<LoginPages />}></Route>
           </Route>
-
+          <Route exact path="/register" element={<RegisterPages />}></Route>
           <Route element={<ProtectedRoutes />}>
             <Route
               exact

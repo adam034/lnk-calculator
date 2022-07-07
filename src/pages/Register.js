@@ -3,29 +3,36 @@ import icon from "../assets/logo_user.png";
 import axios from "axios";
 import { Alert } from "react-bootstrap";
 import "../style/login-page.css";
-import { useNavigate,Navigate } from "react-router-dom";
-const LoginPages = () => {
+import { useNavigate } from "react-router-dom";
+const RegisterPages = () => {
   const baseUrl = process.env.REACT_APP_BASE_URL_PRODUCTION;
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [fullname, setFullname] = useState("");
   const [error, setError] = useState("");
   const handleSubmit = async (e) => {
     let data = {
       username: username,
       password: password,
+      fullname: fullname
     };
     e.preventDefault();
-    const login = await axios.post(`${baseUrl}/login`, data);
-    if (login.data.success === false) {
-      setError(login.data.message);
-    } else if (login.data.success === true) {
-      localStorage.setItem("token", login.data.data.token);
-      navigate("/calculator");
+    if (username === "" || password === "" || fullname === "") {
+        setError("field tidak boleh kosong")
+    } else {
+        const login = await axios.post(`${baseUrl}/register`, data);
+        if (login.data.success === false) {
+          setError(login.data.message);
+        } else if (login.data.success === true) {
+            //console.log(login.data)
+        navigate("/login");
+        }
     }
+    
   };
-  const handleNavigate = () => {
-    navigate('/register')
+  const handleLogin = () => {
+    navigate('/login')
   }
   return (
     <div className="main">
@@ -37,7 +44,7 @@ const LoginPages = () => {
             </div>
           </div>
           <div>
-            <h1>Login Page</h1>
+            <h1>Register Page</h1>
             <div>
               <input
                 type="username"
@@ -45,7 +52,7 @@ const LoginPages = () => {
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="Username"
                 className="username"
-              ></input>
+              required></input>
             </div>
             <div>
               <input
@@ -54,13 +61,22 @@ const LoginPages = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Password"
                 className="password"
-              ></input>
+              required></input>
+            </div>
+            <div>
+              <input
+                type="fullname"
+                value={fullname}
+                onChange={(e) => setFullname(e.target.value)}
+                placeholder="Fullname"
+                className="password"
+              required></input>
             </div>
             <button className="button-login" onClick={handleSubmit}>
-              Login
-            </button>
-            <button className="button-login" onClick={handleNavigate}>
               Register
+            </button>
+            <button className="button-login" onClick={handleLogin}>
+              Login
             </button>
             {error !== "" ? <Alert variant="warning"> {error} </Alert> : ""}
           </div>
@@ -69,4 +85,4 @@ const LoginPages = () => {
     </div>
   );
 };
-export default LoginPages;
+export default RegisterPages;
